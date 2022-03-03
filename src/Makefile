@@ -32,7 +32,7 @@ VOSK_HEADERS= \
 	vosk_api.h
 
 CFLAGS=-g -O3 -std=c++17 -Wno-deprecated-declarations -fPIC -DFST_NO_DYNAMIC_LINKING \
-	-I. -I$(KALDI_ROOT)/src -I$(OPENFST_ROOT)/include $(EXTRA_CFLAGS) 
+	-I. -I$(KALDI_ROOT)/src -I$(OPENFST_ROOT)/include $(EXTRA_CFLAGS)
 
 LIBS= \
 	$(KALDI_ROOT)/src/online2/kaldi-online2.a \
@@ -96,7 +96,7 @@ $(OUTDIR)/libvosk.$(EXT): $(VOSK_SOURCES:%.cc=$(OUTDIR)/%.o) $(LIBS)
 	$(CXX) --shared -s -o $@ $^ $(LDFLAGS) -lm -latomic $(EXTRA_LDFLAGS)
 
 $(OUTDIR)/%.o: %.cc $(VOSK_HEADERS)
-	$(CXX) $(CFLAGS) -c -o $@ $<
+	$(CXX) $(CFLAGS) -c -o $@ -D_FILE_OFFSET_BITS=64 $<
 
 clean:
 	rm -f *.o *.so *.dll
