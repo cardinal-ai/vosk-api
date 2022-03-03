@@ -18,6 +18,9 @@
 
 #include "model.h"
 
+// added by itspower to allow larger files to be loaded on 32bits platforms
+#define _FILE_OFFSET_BITS 64
+
 #include <sys/stat.h>
 #include <fst/fst.h>
 #include <fst/register.h>
